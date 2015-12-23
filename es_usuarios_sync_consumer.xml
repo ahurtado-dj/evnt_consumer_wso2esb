@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+
+<inboundEndpoint xmlns="http://ws.apache.org/ns/synapse"
+                 name="Usuarios_sync_KakfaConsumerEP"
+                 sequence="Usuarios_sync_KakfaConsumerSEQ"
+                 onError="fault"
+                 protocol="kafka"
+                 suspend="false">
+   <parameters>
+      <parameter name="interval">10</parameter> 
+      <parameter name="coordination">false</parameter>
+      <parameter name="sequential">false</parameter>
+      <parameter name="zookeeper.connect">192.168.90.30:2181</parameter>
+      <parameter name="consumer.type">highlevel</parameter>
+      <parameter name="content.type">application/json</parameter>
+      <parameter name="topics">my-topic-test</parameter>
+      <parameter name="group.id">test-group</parameter>
+   </parameters>
+</inboundEndpoint>
+
+<sequence name="Usuarios_sync_KakfaConsumerSEQ" xmlns="http://ws.apache.org/ns/synapse">
+  <log level="full"/>
+  <drop/>
+</sequence>
+
+</definitions>
